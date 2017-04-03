@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tag Along</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" href="Images/TagFavIcon.png">
+</head>
+
+<body>
+    <header>
+
+        <hgroup id="document-title">
+
+            <h1>Tag Along</h1>
+            <h2>An iOS app</h2>
+            <h3>Decide when to tag along with friends</h3>
+
+        </hgroup>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Go to top</a></li>
+            </ul>
+        </nav>
+    </header>
+    <form onSubmit="signin(email,password)"> Email:<br>
+    <input type="text" name="email">
+    <br> Password:<br>
+    <input type="password" name="password">
+    <br><br>
+    <input type="submit" value="Submit">
+    </form>
+</body>
+<script src="script.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-messaging.js"></script>
+<!-- Leave out Storage -->
+<!-- <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCTzLjSH9JkVlltJKJFJVe8st6bz0xGvkw",
+        authDomain: "tag-along-6c539.firebaseapp.com",
+        databaseURL: "https://tag-along-6c539.firebaseio.com",
+        projectId: "tag-along-6c539",
+        storageBucket: "tag-along-6c539.appspot.com",
+        messagingSenderId: "1086250717646"
+    };
+    firebase.initializeApp(config);
+
+</script>
+
+</html>

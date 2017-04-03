@@ -1,0 +1,58 @@
+#banner {
+  height: 5rem;
+  background-color: blue;
+  position: fixed;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  z-index: 100;
+}
+p {
+  color: green;
+}
+#main {
+  padding-top: 5rem;
+  width: 60rem;
+  height: 1000rem;
+  display: table;
+  margin: 0 auto;
+}
+.image-holder {
+  width: inherit;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+img {
+  position: relative;
+  width: inherit;
+  top: 0;
+  left: 0;
+}
+.img-overlay {
+  position: absolute;
+  width: inherit;
+  top: 0;
+  left: 0;
+}
+article {
+  width: inherit;
+  height: 70rem;
+  border: .5rem solid black;
+  box-sizing: initial;
+}
+h1 {
+  position: absolute;
+  margin: auto;
+}
+h2 {
+  text-align: center;
+}
+.location {
+  top: 70%;
+  right: 2rem;
+}
+.time {
+  top: 85%;
+  right: 2rem;
+}
