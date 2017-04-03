@@ -1,2 +1,4 @@
-var userId = firebase.auth().currentUser.uid;
-alert(userId);
+let alertLogin = () => {
+    var userId = firebase.auth().currentUser.uid;
+    alert(userId);
+}

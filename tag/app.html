@@ -26,7 +26,14 @@
         </article>
     </main>
 </body>
-<script src="scripts/app.js"></script>
+<script src="scripts/init-login.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-messaging.js"></script>
+<!-- Leave out Storage -->
+<!-- <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -38,6 +45,6 @@
     messagingSenderId: "1086250717646"
   };
   firebase.initializeApp(config);
-
 </script>
+<script src="scripts/app.js"></script>
 </html>

@@ -124,8 +124,8 @@ function initApp() {
         // [END_EXCLUDE]
         if (user) {
             // User is signed in.
-            window.location.href = "app.html";
-            console.log("change");
+            // window.location.href = "app.html";
+            document.getElementById("signin").remove();
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
