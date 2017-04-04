@@ -5,13 +5,15 @@
   <meta charset=utf-8 />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Email/Password Authentication Example</title>
-
   <!-- Material Design Theming -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/app.css">
 </head>
 
 <body>
-  <div id=signin>
+  <div id="log"></div>
+  <div w3-include-html="app.html"></div>
+  <div id="signin">
     <div class="mdl-card__supporting-text mdl-color-text--grey-600">
       <p>Enter an email and password below and either sign in to an existing account or sign up</p>
 
@@ -35,6 +37,7 @@
   </div>
 </body>
 
+<script src="https://www.w3schools.com/lib/w3data.js"></script>
 <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 <script src="scripts/init-login.js"></script>
 <script src="scripts/app.js"></script>

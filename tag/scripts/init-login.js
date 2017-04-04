@@ -1,5 +1,6 @@
-
-
+let currentUserUID = "";
+var promiseCount = 0;
+let loading = true;
 /**
     * Handles the sign in button press.
     */
@@ -125,18 +126,21 @@ function initApp() {
         if (user) {
             // User is signed in.
             // window.location.href = "app.html";
+            currentUserUID = user.uid;
             document.getElementById("signin").remove();
-            var displayName = user.displayName;
-            var email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var isAnonymous = user.isAnonymous;
-            var uid = user.uid;
-            var providerData = user.providerData;
+            testPromise()
+
+            // var displayName = user.displayName;
+            // var email = user.email;
+            // var emailVerified = user.emailVerified;
+            // var photoURL = user.photoURL;
+            // var isAnonymous = user.isAnonymous;
+            // var uid = user.uid;
+            // var providerData = user.providerData;
             // [START_EXCLUDE]
-            document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
-            document.getElementById('quickstart-sign-in').textContent = 'Sign out';
-            document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
+            // document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
+            // document.getElementById('quickstart-sign-in').textContent = 'Sign out';
+            // document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
             if (!emailVerified) {
                 document.getElementById('quickstart-verify-email').disabled = false;
             }
@@ -164,3 +168,73 @@ function initApp() {
 window.onload = function () {
     initApp();
 };
+
+function testPromise() {
+    let p1 = new Promise(
+        (resolve, reject) => {
+            w3IncludeHTML();
+            window.setTimeout(
+                function () {
+                    resolve("hey");
+                }, 500);
+        }
+    );
+
+    p1.then(
+        function (val) {
+            fillView();
+        })
+        .catch(
+        (reason) => {
+            console.log('Handle rejected promise (' + reason + ') here.');
+        });
+}
+
+let fillView = () => {
+    return firebase.database().ref('/events').once('value').then(function (snapshot) {
+                snapshot.forEach(function(childSnapshot){
+                    let eventName = childSnapshot.child("eventName").val();
+                    let eventPicture = childSnapshot.child("eventPicture").val();
+                    let eventSummary = childSnapshot.child("eventSummary").val();
+                    let location = childSnapshot.child("location").val();
+                    let owner = childSnapshot.child("owner").val();
+                    let time = childSnapshot.child("time").val();
+
+                    let article = document.createElement("article");
+                    let titleH = document.createElement("h2");
+                    titleH.innerHTML = eventName;
+                    let imageHolder = document.createElement("div");
+                    imageHolder.className = "image-holder";
+                    let img = document.createElement("img");
+                    img.src = "images/16_9.jpg";
+                    let imgOverlay = document.createElement("img");
+                    imgOverlay.className = "img-overlay";
+                    imgOverlay.src = "images/image_overlay.png";
+                    let locationH = document.createElement("h1");
+                    locationH.className = "location";
+                    locationH.innerHTML = location;
+                    let timeH = document.createElement("h1");
+                    timeH.className = "time";
+                    timeH.innerHTML = time;
+                    let eventSummaryH = document.createElement("h2");
+                    eventSummaryH.className = "description";
+                    eventSummaryH.innerHTML = eventSummary;
+                    let ownerH = document.createElement("h2");
+                    ownerH.className = "host";
+                    ownerH.innerHTML = owner;
+
+                    article.appendChild(titleH);
+                    imageHolder.appendChild(img);
+                    imageHolder.appendChild(imgOverlay);
+                    imageHolder.appendChild(locationH);
+                    imageHolder.appendChild(timeH);
+                    article.appendChild(imageHolder);
+                    article.appendChild(eventSummaryH);
+                    article.appendChild(ownerH);
+                    document.getElementById("main").appendChild(article);
+
+                    
+                })
+                
+            });
+}
