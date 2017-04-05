@@ -28,6 +28,7 @@ img {
   width: inherit;
   top: 0;
   left: 0;
+  user-select: none;
 }
 .img-overlay {
   position: absolute;
@@ -42,18 +43,79 @@ article {
   box-sizing: initial;
   margin-bottom: 5rem;
 }
-h1 {
+.flyer-h {
+  left: 0;
+  color: white;
   position: absolute;
-  margin: auto;
-}
-h2 {
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-shadow: 0px 1px 3px #000000;
+  user-select: none;
+  cursor: default;
+}
+.event-name {
+  font-size: 3rem;
+  top: 3rem;
+  left: 0;
+  color: white;
+  position: absolute;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-shadow: 0px 1px 3px #000000;
+  user-select: none;
+  cursor: default;
+}
+.event-summary {
+  font-size: 1.5rem;
+  bottom: 15rem;
+  left: 0;
+  color: white;
+  position: absolute;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-shadow: 0px 1px 3px #000000;
+  user-select: none;
+  cursor: default;
 }
 .location {
-  top: 70%;
-  right: 2rem;
+  font-size: 2rem;
+  bottom: 3rem;
+  left: 0;
+  color: white;
+  position: absolute;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-shadow: 0px 1px 3px #000000;
+  user-select: none;
+  cursor: default;
 }
-.time {
-  top: 85%;
-  right: 2rem;
+.time-d {
+  font-size: 2rem;
+  bottom: 8rem;
+  left: 0;
+  color: white;
+  position: absolute;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-shadow: 0px 1px 3px #000000;
+  user-select: none;
+  cursor: default;
+}
+.time-hm {
+  font-size: 2rem;
+  bottom: 6rem;
+  left: 0;
+  color: white;
+  position: absolute;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-shadow: 0px 1px 3px #000000;
+  user-select: none;
+  cursor: default;
 }

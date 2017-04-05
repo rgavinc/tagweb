@@ -193,6 +193,7 @@ function testPromise() {
 let fillView = () => {
     return firebase.database().ref('/events').once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
+            let storageError = false;
             let storage = firebase.storage();
             let pathReference = storage.ref("Images/EventImage/");
             let eventName = childSnapshot.child("eventName").val();
@@ -203,43 +204,48 @@ let fillView = () => {
             let time = childSnapshot.child("time").val();
 
             let article = document.createElement("article");
-            let titleH = document.createElement("h2");
+            let titleH = document.createElement("h1");
             titleH.innerHTML = eventName;
+            titleH.className = "event-name";
             let imageHolder = document.createElement("div");
             imageHolder.className = "image-holder";
             let img = document.createElement("img");
             let eventPicturePath = pathReference.child(eventPicture).getDownloadURL().then(function (url) {
                 img.src = url;
+            }).then(function () {
+                console.log("success");
+                document.getElementById("main").appendChild(article);
             }).catch(function (error) {
                 console.log("error obtaining image")
-            });
+                storageError = true;
+            })
 
-            let imgOverlay = document.createElement("img");
-            imgOverlay.className = "img-overlay";
-            imgOverlay.src = "images/image_overlay.png";
+            var d = new Date(time);
             let locationH = document.createElement("h1");
             locationH.className = "location";
             locationH.innerHTML = location;
-            let timeH = document.createElement("h1");
-            timeH.className = "time";
-            timeH.innerHTML = time;
-            let eventSummaryH = document.createElement("h2");
-            eventSummaryH.className = "description";
+            let timeD = document.createElement("h1");
+            timeD.className = "time-d";
+            timeD.innerHTML = `${d.getMonth().toString()}/${d.getDay().toString()}/${d.getFullYear().toString()}`;
+            let timeHM = document.createElement("h1");
+            timeHM.className = "time-hm";
+            timeHM.innerHTML = `${d.getHours().toString()}:${d.getMinutes().toString()}`;
+            let eventSummaryH = document.createElement("h1");
+            eventSummaryH.className = "event-summary";
             eventSummaryH.innerHTML = eventSummary;
-            let ownerH = document.createElement("h2");
+            let ownerH = document.createElement("h1");
             ownerH.className = "host";
             ownerH.innerHTML = owner;
 
-            console.log(eventPicturePath);
-            article.appendChild(titleH);
+
             imageHolder.appendChild(img);
-            imageHolder.appendChild(imgOverlay);
+            imageHolder.appendChild(titleH);
             imageHolder.appendChild(locationH);
-            imageHolder.appendChild(timeH);
+            imageHolder.appendChild(timeD);
+            imageHolder.appendChild(timeHM);
+            imageHolder.appendChild(eventSummaryH);
+            imageHolder.appendChild(ownerH);
             article.appendChild(imageHolder);
-            article.appendChild(eventSummaryH);
-            article.appendChild(ownerH);
-            document.getElementById("main").appendChild(article);
         })
 
     });

@@ -32,6 +32,7 @@ img {
     width: inherit;
     top: 0;
     left: 0;
+    user-select: none;
 }
 
 .img-overlay {
@@ -49,21 +50,45 @@ article {
     margin-bottom: 5rem;
 }
 
-h1 {
+.flyer-h {
+    left: 0;
+    color: white;
     position: absolute;
-    margin: auto;
-}
-
-h2 {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
+    user-select: none;
+    cursor: default;
+    // background-color:rgba(0,0,0,0.5);
 }
 
-.location{
-    top: 70%;
-    right: 2rem;
+.event-name {
+    font-size: 3rem;
+    top: 3rem;
+    .flyer-h;
 }
 
-.time{
-    top: 85%;
-    right: 2rem;
+.event-summary {
+    font-size: 1.5rem;
+    bottom: 15rem;
+    .flyer-h;
+}
+
+.location {
+    font-size: 2rem;
+    bottom: 3rem;
+    .flyer-h;
+}
+
+.time-d {
+    font-size: 2rem;
+    bottom: 8rem;
+    .flyer-h;
+}
+
+.time-hm {
+    font-size: 2rem;
+    bottom: 6rem;
+    .flyer-h;
 }
