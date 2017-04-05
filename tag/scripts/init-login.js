@@ -192,48 +192,55 @@ function testPromise() {
 
 let fillView = () => {
     return firebase.database().ref('/events').once('value').then(function (snapshot) {
-                snapshot.forEach(function(childSnapshot){
-                    let eventName = childSnapshot.child("eventName").val();
-                    let eventPicture = childSnapshot.child("eventPicture").val();
-                    let eventSummary = childSnapshot.child("eventSummary").val();
-                    let location = childSnapshot.child("location").val();
-                    let owner = childSnapshot.child("owner").val();
-                    let time = childSnapshot.child("time").val();
+        snapshot.forEach(function (childSnapshot) {
+            let storage = firebase.storage();
+            let pathReference = storage.ref("Images/EventImage/");
+            let eventName = childSnapshot.child("eventName").val();
+            let eventPicture = childSnapshot.child("eventPicture").val();
+            let eventSummary = childSnapshot.child("eventSummary").val();
+            let location = childSnapshot.child("location").val();
+            let owner = childSnapshot.child("owner").val();
+            let time = childSnapshot.child("time").val();
 
-                    let article = document.createElement("article");
-                    let titleH = document.createElement("h2");
-                    titleH.innerHTML = eventName;
-                    let imageHolder = document.createElement("div");
-                    imageHolder.className = "image-holder";
-                    let img = document.createElement("img");
-                    img.src = "images/16_9.jpg";
-                    let imgOverlay = document.createElement("img");
-                    imgOverlay.className = "img-overlay";
-                    imgOverlay.src = "images/image_overlay.png";
-                    let locationH = document.createElement("h1");
-                    locationH.className = "location";
-                    locationH.innerHTML = location;
-                    let timeH = document.createElement("h1");
-                    timeH.className = "time";
-                    timeH.innerHTML = time;
-                    let eventSummaryH = document.createElement("h2");
-                    eventSummaryH.className = "description";
-                    eventSummaryH.innerHTML = eventSummary;
-                    let ownerH = document.createElement("h2");
-                    ownerH.className = "host";
-                    ownerH.innerHTML = owner;
-
-                    console.log(eventPicture);
-                    article.appendChild(titleH);
-                    imageHolder.appendChild(img);
-                    imageHolder.appendChild(imgOverlay);
-                    imageHolder.appendChild(locationH);
-                    imageHolder.appendChild(timeH);
-                    article.appendChild(imageHolder);
-                    article.appendChild(eventSummaryH);
-                    article.appendChild(ownerH);
-                    document.getElementById("main").appendChild(article);
-                })
-                
+            let article = document.createElement("article");
+            let titleH = document.createElement("h2");
+            titleH.innerHTML = eventName;
+            let imageHolder = document.createElement("div");
+            imageHolder.className = "image-holder";
+            let img = document.createElement("img");
+            let eventPicturePath = pathReference.child(eventPicture).getDownloadURL().then(function (url) {
+                img.src = url;
+            }).catch(function (error) {
+                console.log("error obtaining image")
             });
+
+            let imgOverlay = document.createElement("img");
+            imgOverlay.className = "img-overlay";
+            imgOverlay.src = "images/image_overlay.png";
+            let locationH = document.createElement("h1");
+            locationH.className = "location";
+            locationH.innerHTML = location;
+            let timeH = document.createElement("h1");
+            timeH.className = "time";
+            timeH.innerHTML = time;
+            let eventSummaryH = document.createElement("h2");
+            eventSummaryH.className = "description";
+            eventSummaryH.innerHTML = eventSummary;
+            let ownerH = document.createElement("h2");
+            ownerH.className = "host";
+            ownerH.innerHTML = owner;
+
+            console.log(eventPicturePath);
+            article.appendChild(titleH);
+            imageHolder.appendChild(img);
+            imageHolder.appendChild(imgOverlay);
+            imageHolder.appendChild(locationH);
+            imageHolder.appendChild(timeH);
+            article.appendChild(imageHolder);
+            article.appendChild(eventSummaryH);
+            article.appendChild(ownerH);
+            document.getElementById("main").appendChild(article);
+        })
+
+    });
 }

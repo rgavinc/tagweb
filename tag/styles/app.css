@@ -37,7 +37,7 @@ img {
 }
 article {
   width: inherit;
-  height: 70rem;
+  height: 60rem;
   border: .5rem solid black;
   box-sizing: initial;
   margin-bottom: 5rem;
