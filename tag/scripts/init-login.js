@@ -223,6 +223,7 @@ let fillView = () => {
                     ownerH.className = "host";
                     ownerH.innerHTML = owner;
 
+                    console.log(eventPicture);
                     article.appendChild(titleH);
                     imageHolder.appendChild(img);
                     imageHolder.appendChild(imgOverlay);
@@ -232,8 +233,6 @@ let fillView = () => {
                     article.appendChild(eventSummaryH);
                     article.appendChild(ownerH);
                     document.getElementById("main").appendChild(article);
-
-                    
                 })
                 
             });
