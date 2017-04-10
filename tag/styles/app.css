@@ -119,3 +119,32 @@ article {
   user-select: none;
   cursor: default;
 }
+.owner {
+  font-size: 1rem;
+  top: 20rem;
+  left: 0;
+  color: white;
+  position: absolute;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-shadow: 0px 1px 3px #000000;
+  user-select: none;
+  cursor: default;
+}
+.owner::before {
+  content: "event created by user: ";
+}
+.user-img {
+  text-align: center;
+  background-position: 50% 50%;
+  background-size: 8rem;
+  left: 26rem;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  height: 8rem;
+  width: 8rem;
+  top: 10rem;
+  position: absolute;
+  z-index: 2;
+}

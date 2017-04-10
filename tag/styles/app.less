@@ -92,3 +92,26 @@ article {
     bottom: 6rem;
     .flyer-h;
 }
+
+.owner {
+    &::before{
+        content: "event created by user: "
+    }
+    font-size: 1rem;
+    top: 20rem;
+    .flyer-h;
+}
+
+.user-img {
+    text-align: center;
+    background-position: 50% 50%;
+    background-size: 8rem;
+    left: 26rem;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    height: 8rem;
+    width: 8rem;
+    top: 10rem;
+    position: absolute;
+    z-index: 2;
+}

@@ -193,9 +193,8 @@ function testPromise() {
 let fillView = () => {
     return firebase.database().ref('/events').once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-            let storageError = false;
             let storage = firebase.storage();
-            let pathReference = storage.ref("Images/EventImage/");
+            let pathReferenceEventImage = storage.ref("Images/EventImage/");
             let eventName = childSnapshot.child("eventName").val();
             let eventPicture = childSnapshot.child("eventPicture").val();
             let eventSummary = childSnapshot.child("eventSummary").val();
@@ -210,15 +209,16 @@ let fillView = () => {
             let imageHolder = document.createElement("div");
             imageHolder.className = "image-holder";
             let img = document.createElement("img");
-            let eventPicturePath = pathReference.child(eventPicture).getDownloadURL().then(function (url) {
+            let eventPicturePath = pathReferenceEventImage.child(eventPicture).getDownloadURL().then(function (url) {
                 img.src = url;
             }).then(function () {
-                console.log("success");
                 document.getElementById("main").appendChild(article);
             }).catch(function (error) {
-                console.log("error obtaining image")
-                storageError = true;
+                console.log(`error: ${error}`)
             })
+            let ownerH = document.createElement("h1");
+            let userImg = document.createElement("div");
+            userImg.src = userCallBack(ownerH, userImg, owner, getUserImageURL);
 
             var d = new Date(time);
             let locationH = document.createElement("h1");
@@ -233,11 +233,9 @@ let fillView = () => {
             let eventSummaryH = document.createElement("h1");
             eventSummaryH.className = "event-summary";
             eventSummaryH.innerHTML = eventSummary;
-            let ownerH = document.createElement("h1");
-            ownerH.className = "host";
-            ownerH.innerHTML = owner;
 
 
+            imageHolder.appendChild(userImg);
             imageHolder.appendChild(img);
             imageHolder.appendChild(titleH);
             imageHolder.appendChild(locationH);
@@ -247,6 +245,29 @@ let fillView = () => {
             imageHolder.appendChild(ownerH);
             article.appendChild(imageHolder);
         })
+    });
+}
 
+let userCallBack = (ownerH, userImg, userUID, callback) => {
+    return firebase.database().ref('/users').once('value').then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            let uid = childSnapshot.child("uid").val();
+            if (uid === userUID) {
+                ownerH.className = "owner";
+                ownerH.innerHTML = childSnapshot.child("username").val();
+                let pic = childSnapshot.child("profilePicture").val();
+                callback(userImg, pic);
+            }
+        })
+    });
+}
+
+let getUserImageURL = (userImg, pic) => {
+    let storage = firebase.storage();
+    let pathReferenceUserImage = storage.ref("Images/ProfileImage/");
+    let userPicturePath = pathReferenceUserImage.child(pic).getDownloadURL().then(function (url) {
+        console.log(url);
+        userImg.style.backgroundImage = `url(${url})`;
+        userImg.className = "user-img";
     });
 }
